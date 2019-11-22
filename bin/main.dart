@@ -18,12 +18,12 @@ minRemovals(String firstString,String secondString){
   }
   else{
     firstStringList.forEach((element) {
-      if(!secondStringList.contains(element)){
-        counter++;
+      if(secondStringList.contains(element)){
         output.add(element);
       }
     });
-    print(output);
+//    print(output);
+    counter = (firstStringList.length - output.length) + (secondStringList.length - output.length);
     return counter;
   }
 
@@ -53,5 +53,5 @@ minRemovals(String firstString,String secondString){
 
 main() {
   print(minRemovals('abcde', 'cab'));
-  print(minRemovals('missisippi', 'pope'));
+  print(minRemovals('mississippi', 'pope'));
 }
