@@ -5,25 +5,32 @@
 //  Examples
 //  minRemovals("abcde", "cab") ➞ 2
 import 'package:collection/collection.dart';
+
+bool isAnagram(String firstString,String secondString){
+  List firstStringList = firstString.split('').toList()..sort();
+  List secondStringList = secondString.split('').toList()..sort();
+
+  return ListEquality().equals(firstStringList, secondStringList);
+}
+
+
 minRemovals(String firstString,String secondString){
   List firstStringList = firstString.split('').toList()..sort();
   List secondStringList = secondString.split('').toList()..sort();
-  print(firstStringList);
-  print(secondStringList);
   int counter = 0;
-  List output = [];
+  List commonLetters = [];
 
-  if(ListEquality().equals(firstStringList, secondStringList)){
+  if(isAnagram(firstString, secondString)){
     return counter;
   }
   else{
     firstStringList.forEach((element) {
       if(secondStringList.contains(element)){
-        output.add(element);
+        commonLetters.add(element);
       }
     });
 //    print(output);
-    counter = (firstStringList.length - output.length) + (secondStringList.length - output.length);
+    counter = (firstStringList.length - commonLetters.length) + (secondStringList.length - commonLetters.length);
     return counter;
   }
 
@@ -50,6 +57,19 @@ minRemovals(String firstString,String secondString){
 //  their length (i.e. no letters in the same positions).
 // - false if they aren't anagrams, or
 // - Their Hamming distance if they are anagrams with >=1 letter at the same index.
+
+isAnagramAndCompleteHamming(String firstString,String secondString){
+  return isAnagram(firstString, secondString) && completeHamming(firstString,secondString);
+}
+
+bool completeHamming(String firstString, String secondString) {
+  for(int i = 0; i < firstString.length; i++){
+    if(firstString[i] == secondString[i]){
+      return false;
+    }
+  }
+  return true;
+}
 
 main() {
   print(minRemovals('abcde', 'cab'));
