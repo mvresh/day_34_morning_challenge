@@ -4,7 +4,31 @@
 // two strings are anagrams of each other.
 //  Examples
 //  minRemovals("abcde", "cab") ➞ 2
+import 'package:collection/collection.dart';
+minRemovals(String firstString,String secondString){
+  List firstStringList = firstString.split('').toList()..sort();
+  List secondStringList = secondString.split('').toList()..sort();
+  print(firstStringList);
+  print(secondStringList);
+  int counter = 0;
+  List output = [];
 
+  if(ListEquality().equals(firstStringList, secondStringList)){
+    return counter;
+  }
+  else{
+    firstStringList.forEach((element) {
+      if(!secondStringList.contains(element)){
+        counter++;
+        output.add(element);
+      }
+    });
+    print(output);
+    return counter;
+  }
+
+
+}
 
 // Challenge 2
 // Farthest Hamming Anagrams
@@ -28,4 +52,6 @@
 // - Their Hamming distance if they are anagrams with >=1 letter at the same index.
 
 main() {
+  print(minRemovals('abcde', 'cab'));
+  print(minRemovals('missisippi', 'pope'));
 }
